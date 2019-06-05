@@ -12,9 +12,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get install -y --no-install-recommends \
     wget curl bzip2 
 
-# do we need these packages?    
-# libpython3-dev libboost-python-dev
-    
 # font packages
 RUN apt-get install -y --no-install-recommends \
     fonts-cantarell lmodern ttf-aenigma ttf-georgewilliams \
