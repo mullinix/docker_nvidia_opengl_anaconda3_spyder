@@ -1,5 +1,7 @@
 FROM nvidia/opengl:1.0-glvnd-runtime-ubuntu16.04
 
+ARG conda_ver=Anaconda3-2019.03-Linux-x86_64
+
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
@@ -27,10 +29,10 @@ RUN echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf
 RUN echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
 
 # download anaconda 3, install, cleanup, set permissions
-RUN wget https://repo.continuum.io/archive/Anaconda3-5.1.0-Linux-x86_64.sh --no-check-certificate && \
-	chmod +x Anaconda3-5.1.0-Linux-x86_64.sh && \
-	/bin/bash Anaconda3-5.1.0-Linux-x86_64.sh -b -p /opt/conda && \
-	rm Anaconda3-5.1.0-Linux-x86_64.sh
+RUN wget -O anaconda-install.sh https://repo.continuum.io/archive/$conda_ver.sh --no-check-certificate && \
+	chmod +x anaconda-install.sh && \
+	/bin/bash anaconda-install.sh -b -p /opt/conda && \
+	rm anaconda-install.sh
 
 # cleanup installation to reduce size
 RUN rm -rf /var/lib/apt/lists/*
